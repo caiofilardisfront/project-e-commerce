@@ -13,32 +13,42 @@
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cabecalho.css">
 
 </head>
 
 <body>
     <!-- Cabeçalho do site: Contem Logo | Menu de navegação | Botão -->
-    <header>
-        <!-- Logo do site -->
-        <a href="/">
-            <img src="./assets/images/logo.svg" alt="Logo do Projeto E-commerce">
-        </a>
-
-        <!-- Menu de navegação -->
-        <nav>
-            <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="#products">Produtos</a></li>
-                <li><a href="#faq">Perguntas Frequentes</a></li>
-                <li><a href="#faleconosco">Fale Conosco</a></li>
-            </ul>
-        </nav>
-
-        <!-- Botão de ação -->
-        <button type="button">
-            <img src="./assets/images/icone_carrinho.svg" alt="Carrinho de Compras">
-        </button>
+    <header class="cabecalho menu-ativo">
+        <div class="header-conteudo">
+            <div class="header-esquerda">
+            
+            <button class="menu-hamburguer">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <!-- Logo do site -->
+            <a class="logo" href="/">
+                <img src="./assets/images/logo.svg" alt="Logo do Projeto E-commerce">
+            </a>
+            </div>
+            <!-- Menu de navegação -->
+            <nav class="menu-principal">
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#products">Produtos</a></li>
+                    <li><a href="#faq">Perguntas Frequentes</a></li>
+                    <li><a href="#faleconosco">Fale Conosco</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Botão de ação -->
+            <button class="botao-carrinho" type="button" value="0">
+                <img src="./assets/images/icone_carrinho.svg" alt="Carrinho de Compras">
+                <span id="contador-carrinho">0</span>
+            </button>
+        </div>
     </header>
 
     <!-- Conteúdo principal do site -->
