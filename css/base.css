@@ -1,0 +1,10 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #111111;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto; /* Define as linhas do grid: header, conteúdo principal e footer */
+    grid-template-areas: 
+    "header"
+    "main"
+    "footer"; /* Aplica o Grid nos elementos body */
+}
