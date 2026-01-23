@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/cabecalho.css">
     <link rel="stylesheet" href="css/produtos.css">
+    <link rel="stylesheet" href="css/rodape.css">
 
 </head>
 
@@ -23,16 +24,16 @@
     <header class="cabecalho menu-ativo">
         <div class="header-conteudo">
             <div class="header-esquerda">
-            
-            <button class="menu-hamburguer">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <!-- Logo do site -->
-            <a class="logo" href="/">
-                <img src="./assets/images/logo.svg" alt="Logo do Projeto E-commerce">
-            </a>
+
+                <button class="menu-hamburguer">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Logo do site -->
+                <a class="logo" href="/">
+                    <img src="./assets/images/logo.svg" alt="Logo do Projeto E-commerce">
+                </a>
             </div>
             <!-- Menu de navegação -->
             <nav class="menu-principal">
@@ -43,7 +44,7 @@
                     <li><a href="#faleconosco">Fale Conosco</a></li>
                 </ul>
             </nav>
-            
+
             <!-- Botão de ação -->
             <button class="botao-carrinho" type="button" value="0">
                 <img src="./assets/images/icone_carrinho.svg" alt="Carrinho de Compras">
@@ -112,46 +113,54 @@
     </main>
 
     <!-- Rodapé do site -->
-    <footer>
-        <!-- Institucional -->
-        <nav>
-            <h3>Institucional</h3>
-            <ul>
-                <li><a href="#trocas">Trocas e Devoluções</a></li>
-                <li><a href="#termos">Termos e Condições</a></li>
-                <li><a href="#politica">Política de Privacidade</a></li>
-                <li><a href="#qualidade">Padrão de qualidade</a></li>
-            </ul>
-        </nav>
-        <!-- Endereço -->
-        <nav>
-            <h3>Endereço</h3>
-            <ul>
-                <li><a href="#">Rua Vale do Silicio</a></li>
-                <li>Rio de Janeiro - RJ</li>
-                <li>Brasil</li>
-                <li><a href="#telefone">(21) 9999-9999</a></li>
-                <li><a href="#email">filardis.caio@gmail.com</a></li>
-            </ul>
-        </nav>
-        <div>@2026 - Todos os direitos reservados</div>
+    <footer class="rodape">
+        <div class="container">
+            <nav>
+                <!-- Institucional -->
+                <h3>Institucional</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#Produtos">Produtos</a></li>
+                    <li><a href="#perguntas">Perguntas Frequentes</a></li>
+                    <li><a href="#contato">Fale Conosco</a></li>
+                </ul>
+            </nav>
+            <!-- Ajuda -->
+            <nav>
+                <h3>Ajuda</h3>
+                <ul>
+                    <li><a href="#trocas">Trocas e Devoluções</a></li>
+                    <li><a href="#termos">Termos e Condições</a></li>
+                    <li><a href="#politica">Política de Privacidade</a></li>
+                    <li><a href="#qualidade">Padrão de qualidade</a></li>
+                </ul>
+            </nav>
+            <!-- Endereço -->
+            <nav>
+                <h3>Endereço</h3>
+                <ul>
+                    <li><a href="#">Rua Vale do Silicio</a></li>
+                    <li>Rio de Janeiro - RJ</li>
+                    <li>Brasil</li>
+                    <li><a href="#telefone">(21) 9999-9999</a></li>
+                    <li><a href="#email">filardis.caio@gmail.com</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="copyright">
+            <p>@2026 - Todos os direitos reservados</p>
+        </div>
     </footer>
 
     <!-- Modal de Carrinho -->
-    <!-- [1] -->
-    <div id="modal-1" aria-hidden="true">
-
-        <!-- [2] -->
+    <!-- <div id="modal-1" aria-hidden="true">
         <div tabindex="-1" data-micromodal-close>
-
-            <!-- [3] -->
             <div role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                 <header>
                     <h2 id="modal-1-title">
                         Carrinho de Compras
                     </h2>
-
-                    <!-- [4] -->
                     <button aria-label="Close modal" data-micromodal-close></button>
                 </header>
 
@@ -199,7 +208,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
     <script src="js/script.js"></script>
