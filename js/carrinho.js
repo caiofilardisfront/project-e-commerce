@@ -8,6 +8,11 @@ const botoesAdicionarAoCarrinho = document.querySelectorAll('.adicionar-ao-carri
 botoesAdicionarAoCarrinho.forEach(botao => {
     botao.addEventListener('click', () => {
         // passo 3 - pegar o valor do contador do carrinho e adicionar +1
+        const elementoProduto = event.target.closest('.produto'); // pega o elemento mais próximo com a classe 'produto'
+        const produtoId = elementoProduto.dataset.id; // pega o valor do atributo 'data-id' do elemento produto
+        const produtoNome = elementoProduto.querySelector('.produto-nome').textContent; // pega o nome do produto
+        const produtoImagem = elementoProduto.querySelector('.img').src; // pega a URL da imagem do produto
+        const produtoPreco = parseFloat(elementoProduto.querySelector('.preco').textContent.replace('R$', '').replace(".", "").replace(",",".").trim()); // pega o preço do produto e converte para número
         
     });
 });
