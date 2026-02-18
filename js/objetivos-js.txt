@@ -15,7 +15,6 @@ Objetivo 2 - remover produtos do carrinho
         passo 5 - atualizar o valor
 
 Objetivo 3 - Atualizar os valores do carrinho
-        passo 1 - pegar o input de quantidade do carrinho
-        passo 2 - adicionar evento de escuta no input
-        passo 3 - atualizar o valor total do produto
-        passo 4 - atualizar o valor total do carrinho
+        passo 1 - adicionar evento de escuta no input no tbody
+        passo 2 - atualizar o valor total do produto
+        passo 3 - atualizar o valor total do carrinho

@@ -12,7 +12,7 @@ botoesAdicionarAoCarrinho.forEach(botao => {
         const produtoPreco = parseFloat(elementoProduto.querySelector(".preco").textContent.replace('R$', '').replace(".", "").replace(",", ".").trim()); // pega o preço do produto e converte para número
 
         // 1. bsucar lista de itens no carrinho
-        const carrinho = obterItensDocCarrinho();
+        const carrinho = obterItensDoCarrinho();
 
         // 2. verifica se existe itens no carrinho
         const existeItem = carrinho.find(produto => produto.id === produtoId);
@@ -34,8 +34,7 @@ botoesAdicionarAoCarrinho.forEach(botao => {
 
         // objeto que armazena ações do botão do carrinho
         salvarProdutoCarrinho(carrinho);
-        atualizarContadorCarrinho();
-        renderizarTabelaCarrinhoCompras();
+        atualizarCarrinhoETabela();
     });
 });
 
@@ -43,7 +42,7 @@ function salvarProdutoCarrinho(carrinho) {
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }
 
-function obterItensDocCarrinho() {
+function obterItensDoCarrinho() {
     const produtos = localStorage.getItem("carrinho");
     return produtos ? JSON.parse(produtos) : []; // transforma em objeto
 }
@@ -51,7 +50,7 @@ function obterItensDocCarrinho() {
 // passo 4 - atualizar o contador do carrinho de compras
 function atualizarContadorCarrinho() {
     // 1. pegar o carrinho e listar a quantidade de itens
-    const carrinho = obterItensDocCarrinho();
+    const carrinho = obterItensDoCarrinho();
     let total = 0;
 
     // 2. percorrer os itens e somar a quantidade total de itens
@@ -63,12 +62,11 @@ function atualizarContadorCarrinho() {
     document.getElementById("contador-carrinho").textContent = total;
 }
 
-atualizarContadorCarrinho();
 
 // passo 5 - renderizar a tabela do carrinho de compras
 function renderizarTabelaCarrinhoCompras() {
     // 1. buscar os produtos docarrinho
-    const produtos = obterItensDocCarrinho();
+    const produtos = obterItensDoCarrinho();
 
     // 2. buscar o corpo da tabela
     const corpoTabela = document.querySelector("#modal-1-content table tbody"); // como se fosse uma propriedade CSS
@@ -84,8 +82,8 @@ function renderizarTabelaCarrinhoCompras() {
                         </td>
                         <td>${produto.name}</td>
                         <td class="td-preco-unitario">R$ ${produto.preco.toFixed(2).replace(".", ",")}</td>
-                        <td class="td-quantidade"><input type="number" value="${produto.quantidade}" min="1"></td>
-                        <td class="td-preco-total">${produto.preco.toFixed(2).replace(".", ",")}</td>
+                        <td class="td-quantidade"><input type="number" class="input-quantidade" data-id="${produto.id}" value="${produto.quantidade}" min="1"></td>
+                        <td class="td-preco-total">${(produto.preco * produto.quantidade).toFixed(2).replace(".", ",")}</td>
                         <td><button class="btn-remover" data-id=${produto.id} id="deletar"></button></td>`;
         corpoTabela.appendChild(tr);
     })
@@ -105,14 +103,57 @@ corpoTabela.addEventListener("click", evento => {
 
 });
 
+//-- Objetivo 3 - Atualizar os valores do carrinho
+    //-- passo 1 - adicionar evento de escuta no input do tbody
+corpoTabela.addEventListener("input", evento => {
+    //-- passo 2 - atualizar o valor total do produto
+    if (evento.target.classList.contains("input-quantidade")) {
+        // 1. buscar o carrnho
+        const buscarProdutos = obterItensDoCarrinho();
+        // 2. obtem o item do carrinho
+        const buscarItensCarrinho = buscarProdutos.find(produto => produto.id === evento.target.dataset.id); 
+        let novaQuantidade = parseInt(evento.target.value); // pega o valor do id encontrado
+        // 3. verifico se há produto nele e adiciono a nova quantidade
+        if (buscarItensCarrinho) {
+            buscarItensCarrinho.quantidade = novaQuantidade;
+        }
+        // 4. salvo a nova quantidade
+        salvarProdutoCarrinho(buscarProdutos);
+        atualizarCarrinhoETabela();
+    }
+});
+
 function removeItemDoCarrinho(id) {
     // 1. buscar itens do carrinho
-    const produtos = obterItensDocCarrinho();
+    const produtos = obterItensDoCarrinho();
 
     // 2. filtra os produtos que não possuem o id passado por parÂmetroS
     const carrinhoAtualizado = produtos.filter(produto => produto.id !== id);
     
     salvarProdutoCarrinho(carrinhoAtualizado);
+    atualizarCarrinhoETabela();
+}
+
+// -- passo 3 - atualizar o valor total do carrinho
+function atualizarValorTotalCarrinho() {
+    // 1. buscar itens do carrinho 
+    const buscarProdutos = obterItensDoCarrinho();
+    let total = 0;
+
+    // 2. percorrer esses itens e calculando
+    buscarProdutos.forEach(produto => {
+        total += produto.preco * produto.quantidade; 
+    });
+
+    // 3. pegar o cálculo e mostrar conteúdo na tela
+    document.querySelector("#total-carrinho").textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
+}
+
+function atualizarCarrinhoETabela() {
     atualizarContadorCarrinho();
     renderizarTabelaCarrinhoCompras();
+    atualizarValorTotalCarrinho();
 }
+
+atualizarCarrinhoETabela();
+
