@@ -1,7 +1,4 @@
-/* Objetivo 1 - quando clicar no botao de adicionar ao carrinho temos que atualizar o 
-contador, adicionar o produto no localStorage e atualizar o html do carrinho
-    parte 1 - vamos adicionar +1 no icone do carrinho
-        passo 1 - pegar os botões de adicionar ao carrinho do html */
+//  passo 1 - pegar os botões de adicionar ao carrinho do html
 const botoesAdicionarAoCarrinho = document.querySelectorAll('.adicionar-ao-carrinho'); // variavel imutável 'const' com objeto do tipo NodeList (lista de elementos do DOM)
 
 /*  passo 2 - adicionar uma evento de escuta nesses botões pra quando clicar disparar uma ação */
@@ -95,3 +92,27 @@ function renderizarTabelaCarrinhoCompras() {
 }
 
 renderizarTabelaCarrinhoCompras();
+
+/* ------ Objetivo 2 - remover produtos do carrinho ----- */
+// passo 1 - pegar o botão de deletar do html
+const corpoTabela = document.querySelector("#modal-1-content table tbody");
+corpoTabela.addEventListener("click", evento => {
+    // se a lista contém um "btn-deletar"
+    if (evento.target.classList.contains('btn-remover')) {
+        const id = evento.target.dataset.id;
+        removeItemDoCarrinho(id);
+    }
+
+});
+
+function removeItemDoCarrinho(id) {
+    // 1. buscar itens do carrinho
+    const produtos = obterItensDocCarrinho();
+
+    // 2. filtra os produtos que não possuem o id passado por parÂmetroS
+    const carrinhoAtualizado = produtos.filter(produto => produto.id !== id);
+    
+    salvarProdutoCarrinho(carrinhoAtualizado);
+    atualizarContadorCarrinho();
+    renderizarTabelaCarrinhoCompras();
+}
