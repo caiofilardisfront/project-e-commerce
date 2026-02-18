@@ -12,8 +12,8 @@ botoesAdicionarAoCarrinho.forEach(botao => {
         const produtoId = elementoProduto.dataset.id; // pega o valor do atributo 'data-id' do elemento produto
         const produtoNome = elementoProduto.querySelector(".nome").textContent; // pega o nome do produto
         const produtoImagem = elementoProduto.querySelector("img").getAttribute("src"); // pega a URL da imagem do produto
-        const produtoPreco = parseFloat(elementoProduto.querySelector(".preco").textContent.replace('R$', '').replace(".", "").replace(",",".").trim()); // pega o preço do produto e converte para número
-        
+        const produtoPreco = parseFloat(elementoProduto.querySelector(".preco").textContent.replace('R$', '').replace(".", "").replace(",", ".").trim()); // pega o preço do produto e converte para número
+
         // 1. bsucar lista de itens no carrinho
         const carrinho = obterItensDocCarrinho();
 
@@ -23,7 +23,7 @@ botoesAdicionarAoCarrinho.forEach(botao => {
         // 2.1. se existe produto
         if (existeItem) {
             existeItem.quantidade += 1;
-        } else { 
+        } else {
             // se não existe adiciono o produto com quantidade + 1
             const produto = {
                 id: produtoId,
@@ -38,6 +38,7 @@ botoesAdicionarAoCarrinho.forEach(botao => {
         // objeto que armazena ações do botão do carrinho
         salvarProdutoCarrinho(carrinho);
         atualizarContadorCarrinho();
+        renderizarTabelaCarrinhoCompras();
     });
 });
 
@@ -47,7 +48,7 @@ function salvarProdutoCarrinho(carrinho) {
 
 function obterItensDocCarrinho() {
     const produtos = localStorage.getItem("carrinho");
-    return produtos ? JSON.parse(produtos):[]; // transforma em objeto
+    return produtos ? JSON.parse(produtos) : []; // transforma em objeto
 }
 
 // passo 4 - atualizar o contador do carrinho de compras
@@ -66,3 +67,31 @@ function atualizarContadorCarrinho() {
 }
 
 atualizarContadorCarrinho();
+
+// passo 5 - renderizar a tabela do carrinho de compras
+function renderizarTabelaCarrinhoCompras() {
+    // 1. buscar os produtos docarrinho
+    const produtos = obterItensDocCarrinho();
+
+    // 2. buscar o corpo da tabela
+    const corpoTabela = document.querySelector("#modal-1-content table tbody"); // como se fosse uma propriedade CSS
+
+    // 3. limpar a atbela antes de renderizar
+    corpoTabela.innerHTML = "";
+
+    // 4. Adicionar os itens pegando do carrinho
+    produtos.forEach(produto => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td class="td-produto">
+                            <img src="${produto.imagem}" alt="${produto.nome}">
+                        </td>
+                        <td>${produto.name}</td>
+                        <td class="td-preco-unitario">R$ ${produto.preco.toFixed(2).replace(".", ",")}</td>
+                        <td class="td-quantidade"><input type="number" value="${produto.quantidade}" min="1"></td>
+                        <td class="td-preco-total">${produto.preco.toFixed(2).replace(".", ",")}</td>
+                        <td><button class="btn-remover" data-id=${produto.id} id="deletar"></button></td>`;
+        corpoTabela.appendChild(tr);
+    })
+}
+
+renderizarTabelaCarrinhoCompras();
