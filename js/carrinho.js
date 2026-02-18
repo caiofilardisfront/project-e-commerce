@@ -83,7 +83,7 @@ function renderizarTabelaCarrinhoCompras() {
                         <td>${produto.name}</td>
                         <td class="td-preco-unitario">R$ ${produto.preco.toFixed(2).replace(".", ",")}</td>
                         <td class="td-quantidade"><input type="number" class="input-quantidade" data-id="${produto.id}" value="${produto.quantidade}" min="1"></td>
-                        <td class="td-preco-total">${(produto.preco * produto.quantidade).toFixed(2).replace(".", ",")}</td>
+                        <td class="td-preco-total">R$ ${(produto.preco * produto.quantidade).toFixed(2).replace(".", ",")}</td>
                         <td><button class="btn-remover" data-id=${produto.id} id="deletar"></button></td>`;
         corpoTabela.appendChild(tr);
     })
@@ -146,7 +146,7 @@ function atualizarValorTotalCarrinho() {
     });
 
     // 3. pegar o cálculo e mostrar conteúdo na tela
-    document.querySelector("#total-carrinho").textContent = `R$ ${total.toFixed(2).replace(".", ",")}`;
+    document.querySelector("#total-carrinho").textContent = `Total: R$ ${total.toFixed(2).replace(".", ",")}`;
 }
 
 function atualizarCarrinhoETabela() {
