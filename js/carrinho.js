@@ -35,7 +35,9 @@ botoesAdicionarAoCarrinho.forEach(botao => {
             carrinho.push(produto);
         }
 
+        // objeto que armazena ações do botão do carrinho
         salvarProdutoCarrinho(carrinho);
+        atualizarContadorCarrinho();
     });
 });
 
@@ -47,3 +49,20 @@ function obterItensDocCarrinho() {
     const produtos = localStorage.getItem("carrinho");
     return produtos ? JSON.parse(produtos):[]; // transforma em objeto
 }
+
+// passo 4 - atualizar o contador do carrinho de compras
+function atualizarContadorCarrinho() {
+    // 1. pegar o carrinho e listar a quantidade de itens
+    const carrinho = obterItensDocCarrinho();
+    let total = 0;
+
+    // 2. percorrer os itens e somar a quantidade total de itens
+    carrinho.forEach(produto => {
+        total += produto.quantidade;
+    });
+
+    // 3. pegar e atualizar o valor do carrinho
+    document.getElementById("contador-carrinho").textContent = total;
+}
+
+atualizarContadorCarrinho();
