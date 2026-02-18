@@ -21,18 +21,21 @@
     padding: 1rem 0;
 }
 
-.cabecalho .menu-principal ul li a {
+.cabecalho ul li a {
     color: var(--cor-neutra-clara);
     letter-spacing: 0.1rem;
     text-decoration: none;
     padding: 1rem;
 }
 
-.cabecalho .menu-principal ul li a:hover {
-    background-color: var(--cor-primeria-hover);
+.cabecalho ul li a:hover {
+    background-color: var(--cor-primaria-hover);
     text-decoration: underline;
 }
 
+.cabecalho.menu-ativo .menu-principal {
+    display: block;
+}
 
 .header-conteudo {
     display: flex;
